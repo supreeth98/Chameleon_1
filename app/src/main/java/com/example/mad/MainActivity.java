@@ -14,6 +14,16 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -89,9 +99,32 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             String base64EncodedFile = Base64.encodeToString(bytes, Base64.DEFAULT);
+            callAPI(filename, base64EncodedFile);
         }
         else {
             Toast.makeText(this,"Choose a file", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    protected void callAPI(String filename, String base64EncodedFile) {
+        String URL = "https://v2.convertapi.com/convert/docx/to/pdf?Secret=vQXAaDU4PooP9Ju0";
+        /*String in;
+        JSONObject reader = new JSONObject(in);
+        JSONArray parameters = new JSONArray("Parameters");
+        JSONObject name */ //Make the JSON and send and recieve the response and covert from base64
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
 }
