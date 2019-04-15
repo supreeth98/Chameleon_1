@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MAD</string>
+    <string name="title_activity_about">About</string>
 </resources>
